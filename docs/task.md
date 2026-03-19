@@ -63,11 +63,16 @@ how users give feedback, inputs, outputs, edge cases, tools, and output format.
 Then write PRD.md with overview and each task as a subsection:
 
 ## Task <N>: <name>
+- Implemented: true/false  ← set to true once SKILL.md/code for this task is written
+- Test Passed: true/false  ← set to true once test-skill confirms output meets criteria
 - Goal:
 - Inputs:
 - Outputs:
 - Specification 1:
 - Specification 2:
+- ... (as many specs as needed)
+- Test Case (optional):
+- Evaluation Criteria (optional):
 ```
 
 **Output:** `PRD.md`
@@ -76,50 +81,22 @@ git commit `PRD.md`.
 
 ---
 
-### Step 3: Test Design
+# Step 3: Implement
 
-Build tests before implementing. Tests create a feedback loop so agents can learn from their mistakes without human intervention.
-
-Open a fresh session.
-
-Paste this prompt:
-
-```
-Read PRD.md.
-
-For each task, propose test cases covering: happy path, edge cases, bad inputs,
-and failure modes. Each test case must include an explicit input and expected output.
-
-Show me the tests for one task at a time and ask for my approval before moving on.
-Refine any test I reject before proceeding.
-
-Once all tests are approved, add them to each task's subsection in PRD.md.
-```
-
-**Output:** `PRD.md` (updated with test cases)
-
-git commit the updated `PRD.md`.
+Clear the memory and start implementing the skill according to the plan and PRD.md. git commit your SKILL folder. 
 
 > [!TIP]
-> **Running opencode headlessly** — once your skill is written, you can run it non-interactively from the terminal without opening the TUI:
-> ```bash
-> opencode run "Run my skill on this input: ..."
-> ```
-> Useful flags:
-> - `-c` / `--continue` — continue the last session (carries context forward)
-> - `-m provider/model` — override the model, e.g. `-m openrouter/qwen/qwen3-235b-a22b:free`
-> - `--agent <name>` — select a specific agent
+> Shorter instructions are better—for the agent and for you. If `SKILL.md` exceeds ~150 lines, create templates or tools to offload parts of the process.
 >
-> This lets you script repeated test runs, e.g.:
-> ```bash
-> opencode run "Literature-review papers in the papers/ folder."
-> opencode run -c "I didn't like the summary length. Next time, keep each paper to 3 sentences."
-> opencode run "Tell me what you've learned about my preferences."
-> ```
+> If your instruction is longer than that, try `condense the skills by sacrificing grammar while keeping every point intact. No markdown decolation unless necessary.`. Agents follow grammar rules too strictly, leading to unnecessary verbosity. Explicitly permitting grammar sacrifices encourages tighter, more task-oriented output.
 
----
 
-### Step 4: Teach It Your Preferences
+# Step 4: Test and Iterate
+
+Let's test the skill. You can reopen opencode and give a test prompt, or you can simply create a new "test-skill" skill that instructs the agent to spaw a sub-agent to run the skill for a predefined prompt. I created an example, non-tested test-skill in `.agents/skills/test-skill
+
+
+### Step 3: Teach It Your Preferences
 
 Run your assistant on at least three different inputs. After each run, give it feedback, e.g., 
 
@@ -134,11 +111,8 @@ Verify that the assistant:
 
 ---
 
-## Validation
+## Step 4: Test and Iterate 
+
 
 Run your skill on the tests you designed. Fix the skill until you are satisfied.
 
-> [!TIP]
-> Shorter instructions are better—for the agent and for you. If `SKILL.md` exceeds ~150 lines, create templates or tools to offload parts of the process.
->
-> Allowing `Sacrifice grammar` in writing instructions is effective for conciseness. Agents follow grammar rules too strictly, leading to unnecessary verbosity. Explicitly permitting grammar sacrifices encourages tighter, more task-oriented output.

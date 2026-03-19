@@ -9,7 +9,7 @@ Shared files: `test_log.txt` (actual outputs + verdicts + fix recommendations).
 
 ## Lead Agent (loop controller)
 
-1. Read `PRD.md` → collect all tasks where `Completed: false`.
+1. Read `PRD.md` → collect all tasks where `Test Passed: false`.
 2. Spawn one Tester Sub-Agent per task in parallel via Task tool. Pass each: skill name, skill path, task N, task goal, test case input, evaluation criteria.
 3. Wait for all. Read `test_log.txt`. Print summary: `N passed, M failed`.
 4. If any failures: spawn Advisor Sub-Agent once. Wait. Then stop.
@@ -20,7 +20,7 @@ Shared files: `test_log.txt` (actual outputs + verdicts + fix recommendations).
 1. Read `SKILL.md` of the target skill. Understand its steps and expected outputs.
 2. Execute the skill for the assigned test case input: follow SKILL.md steps directly, run any tools it requires. Do not skip steps.
 3. Judge actual output against the evaluation criteria: PASS if criteria met, FAIL otherwise.
-4. If PASS: set `Completed: true` for this task in `PRD.md`.
+4. If PASS: set `Test Passed: true` for this task in `PRD.md`.
 5. Append to `test_log.txt`: `--- Task <N> ---\nInput: <input>\nActual: <output>\nVerdict: PASS|FAIL\nNotes: <notes>`.
 6. Stop.
 
