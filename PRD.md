@@ -3,6 +3,8 @@ name: sanity-check
 version: 1.0
 ---
 
+**Authors:** Mohana Siva Sai Yasodhar Golleru, Rahul Balamurugan
+
 # PRD: sanity-check
 
 ## Goal
@@ -94,3 +96,17 @@ Method: Random Forest, accuracy, random k-fold CV
 - Flags random k-fold as invalid for time-series (future leakage)
 - Recommends walk-forward or time-based split
 - Notes accuracy may be misleading if classes unbalanced
+
+## How to Use
+
+Run the skill in Claude Code by providing:
+- dataset description
+- target variable
+- method
+
+Example:
+Dataset: 25 samples, binary classification  
+Target: disease  
+Method: logistic regression with accuracy  
+
+The assistant returns risks and fixes. It updates preferences and history across runs.
