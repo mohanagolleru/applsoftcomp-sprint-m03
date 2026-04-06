@@ -9,6 +9,8 @@ Build a personalized AI assistant from scratch. You will practice the three core
 
 We use [opencode](https://opencode.ai/) as the coding environment. `claude code` users: rename `.agents` to `.claude`.
 
+**Authors:** Mohana Siva Sai Yasodhar Golleru, Rahul Balamurugan
+
 ## Steps
 
 1. [Before you start](docs/before-you-start.md)
